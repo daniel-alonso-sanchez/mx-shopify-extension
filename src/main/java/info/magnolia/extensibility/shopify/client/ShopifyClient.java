@@ -1,48 +1,44 @@
+/*
+ * This file Copyright (c) 2023 Magnolia International
+ * Ltd.  (http://www.magnolia-cms.com). All rights reserved.
+ *
+ * This program and the accompanying materials are made
+ * available under the terms of the Magnolia Network Agreement
+ * which accompanies this distribution, and is available at
+ * http://www.magnolia-cms.com/mna.html
+ *
+ * Any modifications to this file must keep this entire header
+ * intact.
+ *
+ */
+
 package info.magnolia.extensibility.shopify.client;
 
-import info.magnolia.extensibility.shopify.config.ShopifyConfig;
+import info.magnolia.extensibility.shopify.model.Product;
+import info.magnolia.extensibility.shopify.model.ProductsResponse;
 
-import info.magnolia.extensibility.shopify.mapper.ProductMapper;
-import info.magnolia.extensibility.shopify.model.Item;
-import info.magnolia.extensibility.shopify.model.ItemsResponse;
+import org.eclipse.microprofile.config.ConfigProvider;
+import org.eclipse.microprofile.rest.client.annotation.ClientHeaderParam;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 
-import com.shopify.ShopifySdk;
-import com.shopify.model.ShopifyProduct;
-import com.shopify.model.ShopifyProducts;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+@RegisterRestClient(configKey = "shopify")
+@ClientHeaderParam(name = "X-Shopify-Access-Token", value = "{accessToken}")
+public interface ShopifyClient {
 
-@ApplicationScoped
-public class ShopifyClient {
-    private final ShopifyConfig shopifyConfig;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private ProductMapper productMapper;
-    @Inject
-    public ShopifyClient(ProductMapper productMapper, ShopifyConfig shopifyConfig) {
-        this.productMapper = productMapper;
-        this.shopifyConfig = shopifyConfig;
+    @GET
+    @Path("/products.json")
+    ProductsResponse getItems();
+    @GET
+    @Path("/products/{item_id}.json")
+    Product getItem(@PathParam("item_id") String itemId);
+
+    String EXTENSION_SHOPIFY_ACCESS_TOKEN_CONFIG_KEY = "extension.shopify.access-token";
+    default String accessToken() {
+        return ConfigProvider.getConfig().getValue(EXTENSION_SHOPIFY_ACCESS_TOKEN_CONFIG_KEY,String.class);
     }
-
-    public ItemsResponse getItems() {
-        final ShopifySdk shopifySdk = ShopifySdk.newBuilder()
-                .withSubdomain(shopifyConfig.domain())
-                .withAccessToken(shopifyConfig.accessToken()).build();
-
-        final ShopifyProducts products = shopifySdk.getProducts();
-        return new ItemsResponse().items(productMapper.toDTO(products.values()));
-    }
-    public Item getItem(String itemId) {
-        final ShopifySdk shopifySdk = ShopifySdk.newBuilder()
-                .withSubdomain(shopifyConfig.domain())
-                .withAccessToken(shopifyConfig.accessToken()).build();
-
-        final ShopifyProduct product = shopifySdk.getProduct(itemId);
-
-        return productMapper.toDTO(product);
-    }
-
 }

@@ -12,21 +12,16 @@
  *
  */
 
-package info.magnolia.extensibility.shopify.mapper;
+package info.magnolia.extensibility.shopify.model;
 
-import info.magnolia.extensibility.shopify.model.Image;
-
+import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+public class ProductsResponse {
+    private List<Product> products;
 
-
-
-@Mapper(componentModel = MappingConstants.ComponentModel.JAKARTA)
-public interface ImageMapper {
-    List<String> map(List<Image> value);
-    default String map(Image value){
-        return value.getSrc();
-    };
+    @JsonProperty("products")
+    public List<Product> getProducts() { return products; }
+    @JsonProperty("products")
+    public void setProducts(List<Product> value) { this.products = value; }
 }

@@ -25,14 +25,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ItemsResponse"
-  /items/{id_item}:
+  /items/{item_id}:
     get:
       operationId: get item
       tags:
         - items
       summary: Get an item by ID
       parameters:
-        - name: id_item
+        - name: item_id
           in: path
           required: true
           schema:
