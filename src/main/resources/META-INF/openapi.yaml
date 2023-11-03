@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: shopify-extension-api
+  description: shopify-extension-api
+  version: 1.0.0
+  x-api-id: shopify-extension-api
+  x-audience: external-public
+  contact:
+    email: "contact@magnolia-cms.com"
+    name:  magnolia
+    url: https://www.magnolia-cms.com
+servers:
+  - url: http://localhost:8080
+paths:
+  /items:
+    get:
+      operationId: get items
+      tags:
+        - items
+      summary: Get a list of items
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemsResponse"
+  /items/{id_item}:
+    get:
+      operationId: get item
+      tags:
+        - items
+      summary: Get an item by ID
+      parameters:
+        - name: id_item
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the item to retrieve
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+components:
+  schemas:
+    ItemsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Item"
+    ItemResponse:
+      $ref: "#/components/schemas/Item"
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        published_at:
+          type: string
+          format: date-time
+        vendor:
+          type: string
+        price:
+          type: number
+          format: float
+        quantity:
+          type: integer
+          format: int64
