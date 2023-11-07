@@ -7,7 +7,7 @@ info:
   x-audience: external-public
   contact:
     email: "contact@magnolia-cms.com"
-    name:  magnolia
+    name: magnolia
     url: https://www.magnolia-cms.com
 servers:
   - url: http://localhost:8080
@@ -25,6 +25,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ItemsResponse"
+              examples:
+                sample1:
+                  value:
+                    items:
+                      - id: "1"
+                        title: "Sample Item 1"
+                        images: ["https://www.server.com/image1.jpg", "https://www.server.com/image2.jpg"]
+                        published_at: "2023-01-01T12:00:00Z"
+                        vendor: "Vendor A"
+                        price: 19.99
+                        quantity: 10
+                      - id: "2"
+                        title: "Sample Item 2"
+                        images: ["https://www.server.com/image3.jpg"]
+                        published_at: "2023-02-01T14:30:00Z"
+                        vendor: "Vendor B"
+                        price: 29.99
+                        quantity: 5
   /items/{item_id}:
     get:
       operationId: get item
@@ -45,6 +63,16 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ItemResponse"
+              examples:
+                sample1:
+                  value:
+                    id: "1"
+                    title: "Sample Item 1"
+                    images: ["https://www.server.com/image1.jpg", "https://www.server.com/image2.jpg"]
+                    published_at: "2023-01-01T12:00:00Z"
+                    vendor: "Vendor A"
+                    price: 19.99
+                    quantity: 10
 components:
   schemas:
     ItemsResponse:
