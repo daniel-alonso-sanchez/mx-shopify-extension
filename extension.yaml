@@ -1,10 +1,10 @@
 build:
   type: mvn-quarkus-jib
   properties:
-    container-name: extensions/shopify-extension
+    container-name: extensions/shopify
     container-tag: latest
 deploy:
   type: container-deploy
   properties:
-    endpoint-prefix: shopify-extension
+    endpoint-prefix: shopify
     endpoint-accessibility: public
