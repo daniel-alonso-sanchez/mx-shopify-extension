@@ -30,7 +30,7 @@ public class ShopifyService {
     }
     public Item getItem(String itemId) {
         logger.debug("Calling get product by id: {}", itemId);
-        return productMapper.toDTO(shopifyClient.getItem(itemId));
+        return productMapper.toDTO(shopifyClient.getItem(itemId).getProduct());
     }
 
 }

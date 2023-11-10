@@ -16,8 +16,8 @@ package info.magnolia.extensibility.shopify.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import info.magnolia.extensibility.shopify.exception.NotFoundException;
 import info.magnolia.extensibility.shopify.extension.WireMockTestExtension;
-import info.magnolia.extensibility.shopify.service.ShopifyService;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.WebApplicationException;
 
 @QuarkusTest
 @QuarkusTestResource(WireMockTestExtension.class)
@@ -61,7 +60,7 @@ class ShopifyServiceTest {
     @Test
     @DisplayName("Should fail with a 404 when a non existing id is provided")
     void shouldFailWith404WhenNonExistingIdIsProvided() {
-        assertThrows(WebApplicationException.class, ()->{
+        assertThrows(NotFoundException.class, ()->{
             shopifyService.getItem("non_existing_id");
         });
     }

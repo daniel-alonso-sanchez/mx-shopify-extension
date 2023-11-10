@@ -19,7 +19,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 public class Product {
-    private long id;
+    private Long id;
     private String title;
     private String bodyHTML;
     private String vendor;
@@ -39,9 +39,9 @@ public class Product {
     private Image image;
 
     @JsonProperty("id")
-    public long getID() { return id; }
+    public Long getID() { return id; }
     @JsonProperty("id")
-    public void setID(long value) { this.id = value; }
+    public void setID(Long value) { this.id = value; }
 
     @JsonProperty("title")
     public String getTitle() { return title; }
