@@ -30,6 +30,7 @@ public interface ProductMapper {
 
     List<Item> toDTO (List<Product> product);
     @Mappings(value = {
+            @Mapping(expression = "java(product.getID()!=null?product.getID().toString():null)", target = "id"),
             @Mapping(expression = "java((product.getVariants()!=null && ! product.getVariants().isEmpty())?product.getVariants().get(0).getPrice().floatValue():null)", target = "price"),
             @Mapping(expression = "java((product.getVariants()!=null && ! product.getVariants().isEmpty())?product.getVariants().get(0).getInventoryQuantity():null)", target="quantity")
     })

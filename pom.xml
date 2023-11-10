@@ -18,6 +18,7 @@
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.1.2</surefire-plugin.version>
     <wiremock.version>3.2.0</wiremock.version>
+    <quarkus-resteasy-problem.version>3.1.0</quarkus-resteasy-problem.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -31,12 +32,10 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <!--
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-info</artifactId>
     </dependency>
-    -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
@@ -61,12 +60,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
-    <!--
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-opentelemetry</artifactId>
     </dependency>
-    -->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
@@ -78,11 +75,12 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-jackson</artifactId>
+      <artifactId>quarkus-rest-client-reactive-jackson</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client</artifactId>
+      <groupId>com.tietoevry.quarkus</groupId>
+      <artifactId>quarkus-resteasy-problem</artifactId>
+      <version>${quarkus-resteasy-problem.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>

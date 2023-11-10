@@ -43,6 +43,27 @@ paths:
                         vendor: "Vendor B"
                         price: 29.99
                         quantity: 5
+        '401':
+          description: Not authorized
+          content:
+            application/problem+json:
+              example:
+                status: 401
+                title: There was an authorization problem calling Shopify API
+                detail: '{"errors":"[API] Invalid API key or access token (unrecognized login or wrong password)"}'
+                instance: /items
+                trace_id: 88ffd347271fa6ad57bb8807777fd084
+                span_id: b22be4154e4ed077
+        '500':
+          description: Generic Error
+          content:
+            application/problem+json:
+              example:
+                status: 500
+                title: Internal Server Error
+                instance: /items/3
+                trace_id: 0245b7b69433e11d1afc0d6b641454ab
+                span_id: 4a70708f100a4ffd
   /items/{item_id}:
     get:
       operationId: get item
@@ -73,6 +94,38 @@ paths:
                     vendor: "Vendor A"
                     price: 19.99
                     quantity: 10
+        '401':
+          description: Not authorized
+          content:
+            application/problem+json:
+              example:
+                status: 401
+                title: There was an authorization problem calling Shopify API
+                detail: '{"errors":"[API] Invalid API key or access token (unrecognized login or wrong password)"}'
+                instance: /items
+                trace_id: 88ffd347271fa6ad57bb8807777fd084
+                span_id: b22be4154e4ed077
+        '404':
+          description: Not found
+          content:
+            application/problem+json:
+              example:
+                status: 404
+                title: Product not found
+                detail: '{"errors":"Not Found"}'
+                instance: /items/3
+                trace_id: 0245b7b69433e11d1afc0d6b641454ab
+                span_id: 4a70708f100a4ffd
+        '500':
+          description: Generic Error
+          content:
+            application/problem+json:
+              example:
+                status: 500
+                title: Internal Server Error
+                instance: /items/3
+                trace_id: 0245b7b69433e11d1afc0d6b641454ab
+                span_id: 4a70708f100a4ffd
 components:
   schemas:
     ItemsResponse:
