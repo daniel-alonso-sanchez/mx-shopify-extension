@@ -47,6 +47,8 @@ paths:
           description: Not authorized
           content:
             application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 status: 401
                 title: There was an authorization problem calling Shopify API
@@ -58,6 +60,8 @@ paths:
           description: Generic Error
           content:
             application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 status: 500
                 title: Internal Server Error
@@ -98,6 +102,8 @@ paths:
           description: Not authorized
           content:
             application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 status: 401
                 title: There was an authorization problem calling Shopify API
@@ -109,6 +115,8 @@ paths:
           description: Not found
           content:
             application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 status: 404
                 title: Product not found
@@ -120,6 +128,8 @@ paths:
           description: Generic Error
           content:
             application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
               example:
                 status: 500
                 title: Internal Server Error
@@ -159,3 +169,18 @@ components:
         quantity:
           type: integer
           format: int64
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        title:
+          type: string
+        detail:
+          type: string
+        instance:
+          type: string
+        trace_id:
+          type: string
+        space_id:
+          type: string
