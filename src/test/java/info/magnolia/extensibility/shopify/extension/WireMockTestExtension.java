@@ -102,6 +102,12 @@ public class WireMockTestExtension implements QuarkusTestResourceLifecycleManage
               ]
             }
             """, GET_ITEM_RESPONSE_OK);
+    private static final String GET_ITEM_ROOT_RESPONSE_OK= String.format("""
+            {
+              "product":
+                %s
+            }
+            """, GET_ITEM_RESPONSE_OK);
     private WireMockServer wireMockServer;
 
     @Override
@@ -126,7 +132,7 @@ public class WireMockTestExtension implements QuarkusTestResourceLifecycleManage
                         .willReturn(aResponse()
                                 .withHeader("Content-Type", "application/json")
                                 .withBody(
-                                        GET_ITEM_RESPONSE_OK
+                                        GET_ITEM_ROOT_RESPONSE_OK
                                 )));
         wireMockServer.stubFor(
 
@@ -142,7 +148,10 @@ public class WireMockTestExtension implements QuarkusTestResourceLifecycleManage
                         .willReturn(aResponse()
                                 .withStatus(404)));
 
-        return Map.of("quarkus.rest-client.shopify.url", wireMockServer.baseUrl());
+        return Map.of(
+                "quarkus.rest-client.shopify.url", wireMockServer.baseUrl(),
+                "extension.shopify.access-token","dummy-token"
+                );
     }
 
     @Override
