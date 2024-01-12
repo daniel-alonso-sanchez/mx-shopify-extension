@@ -1,51 +1,51 @@
-type: object
-properties:
-  id:
-    type: integer
-    description: Unique ID of the Pokemon.
-  name:
-    type: string
-    description: Name of the Pokemon.
-  type:
-    type: array
-    items:
-      type: string
-    description: Type(s) of the Pokemon.
-  base_experience:
-    type: integer
-    description: Base experience of the Pokemon.
-  height:
-    type: number
-    description: Height of the Pokemon.
-  weight:
-    type: number
-    description: Weight of the Pokemon.
-  abilities:
-    type: array
-    items:
-      type: string
-    description: Ability(ies) of the Pokemon.
-  stats:
-    type: object
-    properties:
-      hp:
-        type: integer
-        description: Hit Points of the Pokemon.
-      attack:
-        type: integer
-        description: Attack points of the Pokemon.
-      defense:
-        type: integer
-        description: Defense points of the Pokemon.
-      speed:
-        type: integer
-        description: Speed of the Pokemon.
-required:
-  - id
-  - name
-  - type
-  - base_experience
-  - height
-  - weight
-  - abilities
-  - stats
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Unique ID of the Pokemon."
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the Pokemon."
+    },
+    "type": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Type(s) of the Pokemon."
+      }
+    },
+    "base_experience": {
+      "type": "integer",
+      "description": "Base experience of the Pokemon."
+    },
+    "height": {
+      "type": "number",
+      "description": "Height of the Pokemon."
+    },
+    "weight": {
+      "type": "number",
+      "description": "Weight of the Pokemon."
+    },
+    "abilities": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Ability(ies) of the Pokemon."
+      }
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "hp": { "type": "integer", "description": "Hit Points of the Pokemon." },
+        "attack": { "type": "integer", "description": "Attack points of the Pokemon." },
+        "defense": { "type": "integer", "description": "Defense points of the Pokemon." },
+        "speed": { "type": "integer", "description": "Speed of the Pokemon." }
+     
+      }
+    }    
+  },
+  "required": ["id", "name", "type", "base_experience", "height", "weight", "abilities", "stats"]
+}
